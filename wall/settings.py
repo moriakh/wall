@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
+from env import env
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +28,9 @@ SECRET_KEY = 'django-insecure-_rrbmn^$p+yzxx4b-tp+1^l6f(u#%9rdja8%hin_nysl-kq$g2
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+if env == 'cloud':
+    ALLOWED_HOSTS = ['137.184.84.45']
 
 # Application definition
 
@@ -77,7 +81,7 @@ WSGI_APPLICATION = 'wall.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3')
     }
 }
 
